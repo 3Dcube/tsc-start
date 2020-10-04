@@ -1,7 +1,8 @@
 {
     "compilerOptions": {
         "module": "CommonJS",
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "newLine": "lf"
     },
     "include": [
         "src/**/*"
