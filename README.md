@@ -65,5 +65,5 @@ console.log('hello world')
 
 You can run code like this:
 ```bash
-tsc-start dist/main.ts
+tsc-start dist/main.js
 ```
