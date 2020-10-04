@@ -42,3 +42,28 @@ yarn run dev
 # or
 npm run dev
 ```
+
+## Example
+
+`tsconfig.json`
+```json
+{
+    "compilerOptions": {
+        "module": "CommonJS",
+        "outDir": "./dist"
+    },
+    "include": [
+        "src/**/*"
+    ]
+}
+```
+
+`src/main.ts`
+```typescript
+console.log('hello world')
+```
+
+You can run code like this:
+```bash
+tsc-start dist/main.ts
+```
