@@ -43,7 +43,14 @@ yarn run dev
 npm run dev
 ```
 
-## Example
+## Example with Yarn
+
+```bash
+mkdir example
+cd example
+yarn init -y
+yarn add -D typescript tsc-start
+```
 
 `tsconfig.json`
 ```json
@@ -65,5 +72,5 @@ console.log('hello world')
 
 You can run code like this:
 ```bash
-tsc-start dist/main.js
+yarn run tsc-start dist/main.js
 ```
