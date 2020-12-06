@@ -14,6 +14,10 @@ const targetPath = path.join(process.cwd(), process.argv.slice(-1)[0])
 let currentProcess = null
 let nextProcess = childProcess.fork(entrypointPath)
 
+nextProcess.on('error', (error) => {
+    console.error(error)
+})
+
 compiler.stdout.pipe(process.stdout)
 compiler.stderr.pipe(process.stderr)
 
@@ -25,5 +29,8 @@ compiler.stdout.on('data', (text) => {
         currentProcess = nextProcess
         currentProcess.send({ target: targetPath })
         nextProcess = childProcess.fork(entrypointPath)
+        nextProcess.on('error', (error) => {
+            console.error(error)
+        })
     }
 })

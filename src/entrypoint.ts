@@ -15,12 +15,30 @@ function findManifestPath() {
 
 async function main() {
     const manifestPath = findManifestPath()
-    const manifest = await fs.promises.readFile(manifestPath)
+    const manifestBuffer = await fs.promises.readFile(manifestPath)
+    const manifest = JSON.parse(manifestBuffer.toString())
+
+    if(manifest['devDependencies'] && manifest['devDependencies']['source-map-support']) {
+        try {
+            const dependencyPath = require.resolve('source-map-support/register', {
+                paths: [process.cwd()]
+            })
+            require(dependencyPath)
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     const dependencies = Object.keys(manifest['dependencies'] || {})
 
     for(const dependency of dependencies) {
-        require(dependency)
+        try {
+            const dependencyPath = require.resolve(dependency, {
+                paths: [process.cwd()]
+            })
+            require(dependencyPath)
+        } catch (err) {
+        }
     }
     
     process.on('message', ({ target }) => {
