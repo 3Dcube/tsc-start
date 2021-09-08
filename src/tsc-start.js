@@ -1,6 +1,6 @@
 #!/usr/bin/env node
-import * as childProcess from 'child_process'
-import * as path from 'path'
+const childProcess = require('child_process')
+const path = require('path')
 
 
 const tscPath = require.resolve('typescript/bin/tsc')

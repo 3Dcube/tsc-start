@@ -1,14 +1,11 @@
 {
   "name": "tsc-start",
-  "version": "0.0.7",
-  "main": "index.js",
+  "version": "0.0.8",
+  "main": "src/tsc-start.js",
   "license": "MIT",
   "repository": "https://github.com/3Dcube/tsc-start",
   "bin": {
-    "tsc-start": "dist/tsc-start.js"
-  },
-  "peerDependencies": {
-    "typescript": "*"
+    "tsc-start": "src/tsc-start.js"
   },
   "devDependencies": {
     "@types/node": "^14.11.2",

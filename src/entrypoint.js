@@ -1,6 +1,6 @@
-import * as path from 'path'
-import * as fs from 'fs'
-import * as url from 'url'
+const path = require('path')
+const fs = require('fs')
+const url = require('url')
 
 function findManifestPath() {
     let currentDirPath = process.cwd()
