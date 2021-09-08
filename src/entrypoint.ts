@@ -1,5 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs'
+import * as url from 'url'
 
 function findManifestPath() {
     let currentDirPath = process.cwd()
@@ -42,7 +43,16 @@ async function main() {
     }
     
     process.on('message', ({ target }) => {
-        require(target)
+        try {
+            require(target)
+        } catch (err) {
+            if(err['code'] === 'ERR_REQUIRE_ESM') {
+                const fileURL = url.pathToFileURL(target)
+                import(fileURL.href)
+            } else {
+                throw err
+            }
+        }
     });
       
 }

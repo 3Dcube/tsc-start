@@ -2,7 +2,8 @@
     "compilerOptions": {
         "module": "CommonJS",
         "outDir": "./dist",
-        "newLine": "lf"
+        "newLine": "lf",
+        "target": "ES2017"
     },
     "include": [
         "src/**/*"
