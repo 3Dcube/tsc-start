@@ -4,60 +4,31 @@ Wrapper around `tsc --watch`, when it sees `Found 0 errors` in the stdout it sta
 
 This package also expects that typescript already installed and there is `tsconfig.json` in the root of your project.
 
-Example:
+## Install
 
 ```bash
-tsc-start dist/main.js
+npm install --save-dev typescript @types/node source-map-support tsc-start
 ```
 
-## Install globally
-
-```bash
-yarn global add tsc-start
-# or
-npm i -g tsc-start
-```
-
-## Or install locally in the project
-
-```bash
-yarn add -D tsc-start
-# or
-npm i --save-dev tsc-start
-```
-
-Then you can add `scripts` entry like so
+Then you can add `scripts` entries
 ```json
 {
     "scripts": {
-        "dev": "tsc-start dist/main.js"
+        "dev": "tsc-start build/main.js",
+        "inspect": "tsc-start -- --inspect build/main.js"
     }
 }
 ```
 
-And run it accordingly
+Don't forget about `tsconfig.json`
 
-```bash
-yarn run dev
-# or
-npm run dev
-```
-
-## Example with Yarn
-
-```bash
-mkdir example
-cd example
-yarn init -y
-yarn add -D typescript tsc-start
-```
-
-`tsconfig.json`
 ```json
 {
     "compilerOptions": {
+        "target": "ES2020",
         "module": "CommonJS",
-        "outDir": "./dist"
+        "sourceMap": true,
+        "outDir": "./build"
     },
     "include": [
         "src/**/*"
@@ -65,12 +36,16 @@ yarn add -D typescript tsc-start
 }
 ```
 
-`src/main.ts`
-```typescript
-console.log('hello world')
+And run it
+
+```bash
+npm run dev
 ```
 
-You can run code like this:
+## One-liner Example
+
 ```bash
-yarn run tsc-start dist/main.js
+mkdir tsc-start-example && cd tsc-start-example && mkdir src && printf '{\n  "scripts": {\n    "dev": "tsc-start build/main.js",\n    "inspect": "tsc-start -- --inspect build/main.js"\n  }\n}\n' > ./package.json && npm install --save-dev typescript @types/node source-map-support tsc-start && printf '{\n    "compilerOptions": {\n        "target": "ES2020",\n        "module": "CommonJS",\n        "sourceMap": true,\n        "outDir": "./build"\n    },\n    "include": [\n        "src/**/*"\n    ]\n}\n' > ./tsconfig.json && printf 'console.log('"'"'hello world'"'"')\n' > ./src/main.ts && npm run dev
 ```
+
+Then you can change `src/main.ts` and see the result

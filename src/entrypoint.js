@@ -19,7 +19,10 @@ async function main() {
     const manifestBuffer = await fs.promises.readFile(manifestPath)
     const manifest = JSON.parse(manifestBuffer.toString())
 
-    if(manifest['devDependencies'] && manifest['devDependencies']['source-map-support']) {
+    const dependencies = manifest['dependencies'] || {}
+    const devDependencies = manifest['devDependencies'] || {}
+
+    if(dependencies['source-map-support'] || devDependencies['source-map-support']) {
         try {
             const dependencyPath = require.resolve('source-map-support/register', {
                 paths: [process.cwd()]
@@ -30,18 +33,17 @@ async function main() {
         }
     }
 
-    const dependencies = Object.keys(manifest['dependencies'] || {})
 
-    for(const dependency of dependencies) {
+    for(const dependencyName in dependencies) {
         try {
-            const dependencyPath = require.resolve(dependency, {
+            const dependencyPath = require.resolve(dependencyName, {
                 paths: [process.cwd()]
             })
             require(dependencyPath)
         } catch (err) {
         }
     }
-    
+
     process.on('message', ({ target }) => {
         try {
             require(target)
