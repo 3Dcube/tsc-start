@@ -21,9 +21,9 @@ function parseInspectArg(arg) {
                 port = Number(portStr)
             } else {
                 if(Number(value).toString() === value) {
-                    host = value
-                } else {
                     port = Number(value)
+                } else {
+                    host = value
                 }
             }
         }
