@@ -1,6 +1,6 @@
 {
   "name": "tsc-start",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "src/tsc-start.js",
   "license": "MIT",
   "repository": "https://github.com/3Dcube/tsc-start",

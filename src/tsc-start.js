@@ -18,9 +18,13 @@ function parseInspectArg(arg) {
             if(value.includes(":")) {
                 const [hostStr, portStr] = value.split(":")
                 host = hostStr
-                port = Number.parseInt(portStr)
+                port = Number(portStr)
             } else {
-                port = Number.parseInt(value)
+                if(Number(value).toString() === value) {
+                    host = value
+                } else {
+                    port = Number(value)
+                }
             }
         }
     
