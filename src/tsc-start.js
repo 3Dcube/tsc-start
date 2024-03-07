@@ -105,7 +105,6 @@ function createInspectURLManager(parsedInspectArg) {
                 process.stderr.write(`Debugger listening on ws://${parsedInspectArg.host || "127.0.0.1"}:${parsedInspectArg.port}${parsedURL.pathname}\n` +
                     'For help, see: https://nodejs.org/en/docs/inspector\n')
             }
-            console.log(Array.from(inspectURLMap.values()))
         },
         waitForInspectURL() {
             if(inspectURLMap.has(currentProcess)) {
