@@ -19,6 +19,7 @@ async function main() {
     const manifestBuffer = await fs.promises.readFile(manifestPath)
     const manifest = JSON.parse(manifestBuffer.toString())
 
+    const useImport = manifest['type'] === "module"
     const dependencies = manifest['dependencies'] || {}
     const devDependencies = manifest['devDependencies'] || {}
 
@@ -44,13 +45,17 @@ async function main() {
         }
     }
 
-    process.on('message', ({ target }) => {
+    process.on('message', async ({ target }) => {
+        const fileURL = url.pathToFileURL(target)
         try {
-            require(target)
+            if(useImport) {
+                await import(fileURL.href)
+            } else {
+                require(target)
+            }
         } catch (err) {
             if(err['code'] === 'ERR_REQUIRE_ESM') {
-                const fileURL = url.pathToFileURL(target)
-                import(fileURL.href)
+                await import(fileURL.href)
             } else {
                 throw err
             }

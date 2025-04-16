@@ -1,6 +1,6 @@
 {
   "name": "tsc-start",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "src/tsc-start.js",
   "license": "MIT",
   "repository": "https://github.com/3Dcube/tsc-start",
@@ -8,7 +8,6 @@
     "tsc-start": "src/tsc-start.js"
   },
   "devDependencies": {
-    "@types/node": "^14.11.2",
-    "typescript": "^4.0.3"
+    "@types/node": "^22.14.1"
   }
 }
